@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --box-bg: #f3f4f6;   /* light gray for light mode */
+  --box-text: #4265b2; /* dark text */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --box-bg: #2656a3;  /* dark gray */
+    --box-text: white;
+  }
+}
+/* Add this CSS globally or in your component CSS */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+
+

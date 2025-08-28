@@ -1,0 +1,139 @@
+.today-highlights {
+  background: rgba(255, 255, 255, 0.2); /* ✅ Transparent background */
+  backdrop-filter: blur(10px);          /* ✅ Frosted glass effect */
+  -webkit-backdrop-filter: blur(10px);  /* ✅ For Safari */
+  color: white;
+  border-radius: 0.5rem;
+  padding: 20px; 
+  width: calc(100% - 20px);  
+  margin: 10px;             
+  min-height: 40vh;
+  box-sizing: border-box;
+  border: 4px solid rgba(16, 199, 223, 0.3); /* ✅ Subtle border */
+}
+
+.today-highlights h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.highlights-top {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.highlight-card {
+  background: rgba(10, 190, 206, 0.474); /* ✅ Transparent cards */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(240, 151, 17, 0.3);
+  padding: 1rem; 
+  border-radius: 0.75rem;
+  flex: 1 1 250px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.highlight-header {
+  display: flex;
+  justify-content: center;   /* ✅ Center both title + badge */
+  align-items: center;
+  gap: 10px;                 /* ✅ spacing between */
+  font-size: 16px;
+  flex-wrap: wrap;           /* ✅ prevents overlap on small screens */
+}
+
+.aqi-badge {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.highlight-icon {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.air-details {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  font-size: 13px;
+}
+
+.highlight-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.sun-times {
+  display: flex;
+  justify-content: center;   /* keeps sunrise & sunset in middle */
+  align-items: center;
+  gap: 30px;                 /* adds spacing */
+  padding: 12px;
+  text-align: center;
+  font-size: 1.2rem;         /* removed quotes */
+}
+
+.sun-item {
+  text-align: center;
+  flex: 1;
+  font-size: 1.2rem;         /* removed quotes */
+}
+
+.sun-icon {
+  font-size: 32px;
+}
+
+.sun-item p {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.highlights-bottom {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .today-highlights {
+    padding: 15px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .highlights-top {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .highlight-card {
+    min-height: auto;
+  }
+
+  .highlight-header {
+    font-size: 14px;
+  }
+
+  .sun-times {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .sun-icon {
+    font-size: 28px;
+  }
+}
