@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">   
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopwatch App</title>
+ 
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+
+  <div class="stopwatch-container">
+    <h1>Stopwatch</h1>
+
+    <!-- Video inside the box -->
+    <video id="runnerVideo" loop muted>
+      <source src="run.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div id="time">00:00:00</div>
+
+    <div class="buttons">
+      <button class="start" onclick="startTimer()">Start</button>
+      <button class="stop" onclick="stopTimer()">Stop</button>
+      <button class="reset" onclick="resetTimer()">Reset</button>
+      <button class="lap" onclick="lapTimer()">Lap</button>
+    </div>
+
+    <div class="laps" id="laps"></div>
+  </div>
+
+<script src="./script.js"></script>
+</body>
+</html>

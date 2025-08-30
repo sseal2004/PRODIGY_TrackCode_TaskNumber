@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic-Tac-Toe | Prodigy Task-03</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #fff;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #00e0ff;
+      text-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+      margin-bottom: 1rem;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+
+    .cell {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #00e0ff;
+      border-radius: 10px;
+      font-size: 2.5rem;
+      color: #fff;
+      text-align: center;
+      line-height: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 224, 255, 0.3);
+    }
+
+    .cell:hover {
+      background: rgba(0, 224, 255, 0.1);
+      box-shadow: 0 0 20px #00e0ff;
+    }
+
+    .status {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      padding: 0.6rem 1.4rem;
+      font-size: 1rem;
+      background: #1de9b6;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #00bfa5;
+      transform: translateY(-2px);
+    }
+
+    .choose-btns {
+      margin-bottom: 1rem;
+    }
+
+    .choose-btns button {
+      margin: 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tic-Tac-Toe</h1>
+  <div class="status" id="status">Choose X or O to Start</div>
+
+  <div class="choose-btns" id="chooseBtns">
+    <button class="btn" onclick="chooseSymbol('X')">Play as X</button>
+    <button class="btn" onclick="chooseSymbol('O')">Play as O</button>
+    <select id="difficulty" class="btn">
+      <option value="easy">Low</option>
+      <option value="medium">Medium</option>
+      <option value="hard">High</option>
+    </select>
+  </div>
+
+  <div class="board" id="board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+
+  <button class="btn" onclick="resetGame()">Reset</button>
+
+  <script>
+    const cells = document.querySelectorAll('.cell');
+    const statusText = document.getElementById('status');
+    const chooseBtns = document.getElementById('chooseBtns');
+    const difficultySelect = document.getElementById('difficulty');
+    let board = Array(9).fill("");
+    let playerSymbol = '', computerSymbol = '', currentPlayer = '';
+    let isGameActive = false;
+
+    const winConditions = [
+      [0,1,2],[3,4,5],[6,7,8],
+      [0,3,6],[1,4,7],[2,5,8],
+      [0,4,8],[2,4,6]
+    ];
+
+    function chooseSymbol(symbol) {
+      playerSymbol = symbol;
+      computerSymbol = symbol === 'X' ? 'O' : 'X';
+      currentPlayer = 'X';
+      statusText.textContent = `You are ${playerSymbol}. Your Turn.`;
+      chooseBtns.style.display = 'none';
+      isGameActive = true;
+      if (currentPlayer === computerSymbol) setTimeout(computerMove, 500);
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+      if (!isGameActive || board[index] || currentPlayer !== playerSymbol) return;
+      makeMove(index, playerSymbol);
+      checkResult();
+      if (isGameActive) {
+        currentPlayer = computerSymbol;
+        statusText.textContent = "Computer's Turn...";
+        setTimeout(computerMove, 500);
+      }
+    }
+
+    function makeMove(index, symbol) {
+      board[index] = symbol;
+      cells[index].textContent = symbol;
+    }
+
+    function computerMove() {
+      let index;
+      const difficulty = difficultySelect.value;
+      const empty = board.map((val, i) => val === "" ? i : null).filter(v => v !== null);
+
+      if (difficulty === "easy") {
+        index = empty[Math.floor(Math.random() * empty.length)];
+      } else if (difficulty === "medium") {
+        // Try to win
+        index = findBestMove(computerSymbol);
+        if (index === null) {
+          // Try to block
+          index = findBestMove(playerSymbol);
+        }
+        if (index === null) {
+          index = empty[Math.floor(Math.random() * empty.length)];
+        }
+      } else {
+        // Hard: Full Minimax
+        index = minimax(board, computerSymbol).index;
+      }
+
+      if (index !== null) makeMove(index, computerSymbol);
+      checkResult();
+      if (isGameActive) {
+        currentPlayer = playerSymbol;
+        statusText.textContent = "Your Turn";
+      }
+    }
+
+    function findBestMove(sym) {
+      for (let combo of winConditions) {
+        const [a, b, c] = combo;
+        const values = [board[a], board[b], board[c]];
+        if (values.filter(v => v === sym).length === 2 && values.includes("")) {
+          return combo[values.indexOf("")];
+        }
+      }
+      return null;
+    }
+
+    function minimax(newBoard, player) {
+      const availSpots = newBoard.map((v, i) => v === "" ? i : null).filter(i => i !== null);
+
+      if (checkWin(newBoard, playerSymbol)) return { score: -10 };
+      if (checkWin(newBoard, computerSymbol)) return { score: 10 };
+      if (availSpots.length === 0) return { score: 0 };
+
+      const moves = [];
+      for (let i of availSpots) {
+        let move = { index: i };
+        newBoard[i] = player;
+        let result = minimax(newBoard, player === computerSymbol ? playerSymbol : computerSymbol);
+        move.score = result.score;
+        newBoard[i] = "";
+        moves.push(move);
+      }
+
+      return player === computerSymbol ?
+        moves.reduce((a, b) => (a.score > b.score ? a : b)) :
+        moves.reduce((a, b) => (a.score < b.score ? a : b));
+    }
+
+    function checkWin(bd, sym) {
+      return winConditions.some(([a, b, c]) => bd[a] === sym && bd[b] === sym && bd[c] === sym);
+    }
+
+    function checkResult() {
+      for (let combo of winConditions) {
+        const [a, b, c] = combo;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+          statusText.textContent = board[a] === playerSymbol ? "🎉 You Win!" : "😢 Computer Wins!";
+          isGameActive = false;
+          highlightWin(combo);
+          return;
+        }
+      }
+      if (!board.includes("")) {
+        statusText.textContent = "It's a Draw!";
+        isGameActive = false;
+      }
+    }
+
+    function highlightWin(indices) {
+      indices.forEach(i => {
+        cells[i].style.background = '#00e0ff';
+        cells[i].style.color = '#000';
+      });
+    }
+
+    function resetGame() {
+      board.fill("");
+      cells.forEach(cell => {
+        cell.textContent = "";
+        cell.style.background = 'rgba(255, 255, 255, 0.1)';
+        cell.style.color = '#fff';
+      });
+      isGameActive = false;
+      chooseBtns.style.display = 'block';
+      statusText.textContent = "Choose X or O to Start";
+    }
+
+    cells.forEach(cell => cell.addEventListener('click', handleClick));
+  </script>
+</body>
+</html>

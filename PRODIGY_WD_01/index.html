@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="A visually appealing responsive landing page built using HTML, CSS, and JavaScript for Prodigy Infotech Internship Task-01.">
+  <meta name="author" content="Soumyadipta Seal">
+  <title>Responsive Landing Page | Prodigy Infotech Task</title>
+  <link rel="stylesheet" href="style.css">
+
+
+  <link rel="icon" href="https://img.icons8.com/fluency/48/html-5.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"> <link rel="icon" href="https://img.icons8.com/fluency/48/html-5.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ 
+</head>
+<body>
+  <nav id="navbar">
+    <div class="logo">MyLanding</div>
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+        <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+
+  </nav>
+
+  <section class="hero" id="home">
+    <h1>Welcome to My Landing Page</h1>
+    <p>A visually captivating, responsive, and interactive page built with HTML, CSS, and JavaScript.</p>
+    <a href="#about"><button class="btn">Explore More</button></a>
+  </section>
+
+      <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We are a forward-thinking company dedicated to creating exceptional digital experiences. Our team
+                        combines creativity with technical expertise to deliver solutions that exceed expectations.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-icon">🚀</div>
+                            <h3>Innovation</h3>
+                            <p>Cutting-edge solutions for modern challenges</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Performance</h3>
+                            <p>Lightning-fast and optimized experiences</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🎨</div>
+                            <h3>Design</h3>
+                            <p>Beautiful interfaces that users love</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <section id="services">
+    <h2 class = "black">Skills Demonstrated</h2>
+    <ul>
+      <li>Responsive Design</li>
+      <li>Semantic HTML</li>
+      <li>CSS Flexbox and Grid</li>
+      <li>JavaScript Interactivity</li>
+      <li>Cross-Browser Compatibility</li>
+      <li>Accessibility Standards</li>
+      <li>Code Organization and Clean Architecture</li>
+      <li>Gemini Chat Bot</li>
+      <li>Form Handling with Formspree</li>
+      <li>Dark Mode Toggle</li>
+      <li>Floating Action Buttons</li>
+      <li>Animated Hero Section</li>
+      <li>Glowing Border Effects</li>
+      <li>Responsive Navigation Menu</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+  <h2 class="black">Get in Touch</h2>
+<p style="font-weight: 900; font-size: 1.9rem; margin-left: auto; margin-right: 2rem; text-align: center;">
+  Fill out the form below to connect with me.
+</p>
+  <form id="contact-form" action="https://formspree.io/f/xwpbgdbk" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <input type="tel" name="phone" placeholder="Your Phone Number (Optional)">
+    <input type="email" name="alt-email" placeholder="Alternate Email (Optional)">
+    <input type="url" name="linkedin" placeholder="LinkedIn or Website URL (Optional)">
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button class="btn" type="submit">Send Message</button>
+  </form>
+  <div id="loader"></div>
+  <div id="success-message" style="font-size: 3rem;">✅ Thank you! Your message has been sent.</div>
+</section>
+
+
+  <!-- Floating Buttons -->
+  <!-- Back to Top Button -->
+<button id="backToTop" title="Go to top" style="
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  z-index: 9999;
+">⬆️</button>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/7687967008" target="_blank" id="whatsapp-btn" style="
+  position: fixed;
+  bottom: 88px;
+  right: 26px;
+  z-index: 9999;
+  font-size: 24px;
+  text-decoration: none;
+">💬</a>
+
+<!-- Floating Chat Iframe -->
+<iframe 
+  src="chat_assistance/index.html" 
+  width="400" 
+  height="900" 
+  style="
+    position: fixed;
+    bottom: 20px;
+    right: 80px; /* shifted left to avoid overlapping WhatsApp */
+    border: none;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    z-index: 9999;
+  ">
+</iframe>
+
+  <footer>
+    <p>&copy; 2025 MyLanding | Designed by Soumyadipta Seal | Prodigy Infotech Task 01</p>
+  </footer>
+    <script src="script.js"></script>
+
+
+</body>
+</html>
+
+
+<!-- To receive the submission request  -->
+ <!-- https://formspree.io/forms/xwpbgdbk/submissions -->
