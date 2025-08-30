@@ -1,0 +1,100 @@
+/* General styles */
+.app {
+  min-height: 100vh;
+  background-color: transparent; /* remove white screen */
+  color: #fff; /* text visible on video */
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.app.dark {
+  background-color: rgba(0, 0, 0, 0.7); /* dark overlay */
+  color: #fff;
+}
+
+/* Layout for weather and highlights */
+.content {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  gap: 20px;
+  padding: 20px 30px;
+  width: 100%;
+}
+
+/* top section (main weather + forecast) */
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap; /* responsive */
+  width: 100%;
+}
+
+.main-weather {
+  flex: 1;
+  min-width: 300px;
+}
+
+.five-day-forecast {
+  flex: 1;
+  min-width: 300px;
+  margin-top: 5px;   /* instead of larger margin */
+  padding: 5px 0;    /* minimal padding */
+}
+
+/* today highlights always sits at the bottom */
+.today-highlights {
+  flex: 1;
+  width: 100%;
+  margin-top: 20px;
+  min-width: 300px;
+}
+
+/* Extra info section */
+.extra-info {
+  text-align: center;
+  padding: 20px;
+}
+
+.extra-info h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.extra-info p {
+  font-size: 1rem;
+  margin: 4px 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .top-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .today-highlights {
+    width: 100%;
+  }
+}
+
+html, body {
+  overflow-x: hidden; /* 🚫 disables horizontal scroll for whole page */
+}
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.app {
+  min-height: 100vh; /* ensures the main container takes full viewport height */
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1; /* grows to fill the remaining space above footer */
+}
